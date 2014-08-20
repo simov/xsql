@@ -69,4 +69,24 @@ describe('examples', function () {
             );
         });
     });
+
+    describe('select from', function () {
+        it('select from', function () {
+            var x = new xsql({dialect:'mysql'});
+
+            var concat = [
+                x.wrap(' '),
+                x.func('cast', [x.as(x.name('tbl1','col1'),'char')],' '),
+                x.func('cast', [x.as(x.name('tbl1','col2'),'char')],' ')
+            ];
+
+            var group = ['distinct',x.func('concat_ws',concat)];
+
+            var column = x.as(x.func('group_concat', group,' '),x.name('name'));
+
+            [x.select([column]), x.from(x.name('tbl'))].join(' ').should.equal(
+                "select group_concat(distinct concat_ws(' ',cast(`col1`.`tbl1` as char),cast(`col2`.`tbl1` as char))) as `name` from `tbl`"
+            );
+        });
+    });
 });

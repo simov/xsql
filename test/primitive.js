@@ -152,13 +152,13 @@ describe('primitive', function () {
             (function () {
                 var x = new xsql({dialect:'pg'});
                 x.select();
-            }).should.throw('xsql.select: Missing parameter');
+            }).should.throw('xsql.select: Missing argument');
         });
-        it('throw error on non array argument', function () {
+        it('throw error on non string or array argument', function () {
             (function () {
                 var x = new xsql({dialect:'pg'});
                 x.select({});
-            }).should.throw('xsql.select: Array argument required');
+            }).should.throw('xsql.select: String or Array argument required');
         });
         it('throw error on empty array', function () {
             (function () {
@@ -183,7 +183,7 @@ describe('primitive', function () {
             (function () {
                 var x = new xsql({dialect:'pg'});
                 x.from([]);
-            }).should.throw('xsql.from: Non string argument');
+            }).should.throw('xsql.from: String argument required');
         });
         it('from', function () {
             var x = new xsql({dialect:'pg'});
