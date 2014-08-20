@@ -49,6 +49,18 @@ describe('instance', function () {
         var x = new xsql({dialect:'pg',schema:'schema'});
         x.schema.should.equal('schema');
     });
+    it('enable typecheck by default', function () {
+        (function () {
+            var x = new xsql({dialect:'pg'});
+            x.join();
+        }).should.throw('xsql.join: Missing first argument');
+    });
+    it('disable typecheck', function () {
+        (function () {
+            var x = new xsql({dialect:'pg', typecheck:false});
+            x.join();
+        }).should.throw("Cannot call method 'join' of undefined");
+    });
     it('multiple instances', function () {
         var mysql = new xsql({dialect:'mysql'}),
             pg = new xsql({dialect:'pg'});
