@@ -166,7 +166,11 @@ describe('primitive', function () {
                 x.select([]);
             }).should.throw('xsql.select: Empty array argument');
         });
-        it('select', function () {
+        it('select string', function () {
+            var x = new xsql({dialect:'pg'});
+            x.select('col1').should.equal('select col1');
+        });
+        it('select array', function () {
             var x = new xsql({dialect:'pg'});
             x.select(['col1','col2']).should.equal('select col1,col2');
         });
@@ -188,6 +192,57 @@ describe('primitive', function () {
         it('from', function () {
             var x = new xsql({dialect:'pg'});
             x.from('table').should.equal('from table');
+        });
+    });
+
+    describe('join', function () {
+        it('throw error on missing first argument', function () {
+            (function () {
+                var x = new xsql({dialect:'pg'});
+                x.join();
+            }).should.throw('xsql.join: Missing first argument');
+        });
+        it('throw error on non string first argument', function () {
+            (function () {
+                var x = new xsql({dialect:'pg'});
+                x.join([]);
+            }).should.throw('xsql.join: First argument should be string');
+        });
+        it('throw error on missing second argument', function () {
+            (function () {
+                var x = new xsql({dialect:'pg'});
+                x.join('tbl');
+            }).should.throw('xsql.join: Missing second argument');
+        });
+        it('throw error on non string or array second argument', function () {
+            (function () {
+                var x = new xsql({dialect:'pg'});
+                x.join('tbl',{});
+            }).should.throw('xsql.join: Second argument should be Array or String');
+        });
+        it('throw error on empty second argument', function () {
+            (function () {
+                var x = new xsql({dialect:'pg'});
+                x.join('tbl',[]);
+            }).should.throw('xsql.join: Second argument is empty array');
+        });
+        it('throw error on non string third argument', function () {
+            (function () {
+                var x = new xsql({dialect:'pg'});
+                x.join('tbl','expr',{});
+            }).should.throw('xsql.join: Third argument should be string');
+        });
+        it('join string', function () {
+            var x = new xsql({dialect:'pg'});
+            x.join('tbl','expr').should.equal('join tbl on expr');
+        });
+        it('join array', function () {
+            var x = new xsql({dialect:'pg'});
+            x.join('tbl',['expr1','expr2']).should.equal('join tbl on expr1 and expr2');
+        });
+        it('join type', function () {
+            var x = new xsql({dialect:'pg'});
+            x.join('tbl','expr','left').should.equal('left join tbl on expr');
         });
     });
 });
