@@ -171,4 +171,23 @@ describe('primitive', function () {
             x.select(['col1','col2']).should.equal('select col1,col2');
         });
     });
+
+    describe('from', function () {
+        it('throw error on missing argument', function () {
+            (function () {
+                var x = new xsql({dialect:'pg'});
+                x.from();
+            }).should.throw('xsql.from: Missing argument');
+        });
+        it('throw error on non string argument', function () {
+            (function () {
+                var x = new xsql({dialect:'pg'});
+                x.from([]);
+            }).should.throw('xsql.from: Non string argument');
+        });
+        it('from', function () {
+            var x = new xsql({dialect:'pg'});
+            x.from('table').should.equal('from table');
+        });
+    });
 });
