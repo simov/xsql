@@ -146,4 +146,29 @@ describe('primitive', function () {
             x.func('func', ['arg1','arg2'],' ').should.equal('func(arg1 arg2)');
         });
     });
+
+    describe('select', function () {
+        it('throw error on missing argument', function () {
+            (function () {
+                var x = new xsql({dialect:'pg'});
+                x.select();
+            }).should.throw('xsql.select: Missing parameter');
+        });
+        it('throw error on non array argument', function () {
+            (function () {
+                var x = new xsql({dialect:'pg'});
+                x.select({});
+            }).should.throw('xsql.select: Array argument required');
+        });
+        it('throw error on empty array', function () {
+            (function () {
+                var x = new xsql({dialect:'pg'});
+                x.select([]);
+            }).should.throw('xsql.select: Empty array argument');
+        });
+        it('select', function () {
+            var x = new xsql({dialect:'pg'});
+            x.select(['col1','col2']).should.equal('select col1,col2');
+        });
+    });
 });
