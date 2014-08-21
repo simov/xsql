@@ -53,7 +53,7 @@ describe('instance', function () {
         (function () {
             var x = new xsql({dialect:'pg'});
             x.join();
-        }).should.throw('xsql.join: Missing first argument');
+        }).should.throw('xsql.join: First argument is required');
     });
     it('disable typecheck', function () {
         (function () {
