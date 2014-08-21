@@ -3,6 +3,7 @@ var xsql = require('../lib/instance');
 
 
 describe('primitive', function () {
+
     describe('name', function () {
         it('column', function () {
             var x = new xsql({dialect:'pg'});

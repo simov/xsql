@@ -2,6 +2,76 @@
 var xsql = require('../lib/instance');
 
 
+describe('escape', function () {
+    var x = null;
+    before(function () {
+        x = new xsql({dialect:'pg'});
+    });
+
+    describe('quotes', function () {
+        it('throw error on missing first argument', function () {
+            (function () {
+                x.quotes();
+            }).should.throw('xsql.quotes: First argument is required');
+        });
+        it('throw error on non string first argument', function () {
+            (function () {
+                x.quotes([]);
+            }).should.throw('xsql.quotes: First argument should be string');
+        });
+    });
+
+    describe('wrap', function () {
+        it('throw error on missing first argument', function () {
+            (function () {
+                x.wrap();
+            }).should.throw('xsql.wrap: First argument is required');
+        });
+        it('throw error on non string first argument', function () {
+            (function () {
+                x.wrap([]);
+            }).should.throw('xsql.wrap: First argument should be string');
+        });
+        it('throw error on non string second argument', function () {
+            (function () {
+                x.wrap('str',[]);
+            }).should.throw('xsql.wrap: Second argument should be string');
+        });
+    });
+
+    describe('escape', function () {
+        it('throw error on missing first argument', function () {
+            (function () {
+                x.escape();
+            }).should.throw('xsql.escape: First argument is required');
+        });
+        it('throw error on non string first argument', function () {
+            (function () {
+                x.escape([]);
+            }).should.throw('xsql.escape: First argument should be string');
+        });
+    });
+
+    describe('string', function () {
+        it('throw error on missing first argument', function () {
+            (function () {
+                x.string();
+            }).should.throw('xsql.string: First argument is required');
+        });
+        it('throw error on non string first argument', function () {
+            (function () {
+                x.string([]);
+            }).should.throw('xsql.string: First argument should be string');
+        });
+        it('throw error on non string second argument', function () {
+            (function () {
+                x.string('str',[]);
+            }).should.throw('xsql.string: Second argument should be string');
+        });
+    });
+});
+
+
 describe('primitive', function () {
     var x = null;
     before(function () {

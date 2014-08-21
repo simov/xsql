@@ -2,14 +2,8 @@
 var xsql = require('../lib/instance');
 
 
-describe('quotes', function () {
+describe('escape', function () {
     describe('quotes', function () {
-        it('throw error on missing name parameter', function () {
-            (function () {
-                var x = new xsql({dialect:'mysql'});
-                x.quotes();
-            }).should.throw('xsql.quotes: Name parameter required');
-        });
         it('mysql', function () {
             var x = new xsql({dialect:'mysql'});
             x.quotes('name').should.equal('`name`');
@@ -25,12 +19,6 @@ describe('quotes', function () {
     });
 
     describe('wrap', function () {
-        it('throw error on missing parameter', function () {
-            (function () {
-                var x = new xsql({dialect:'pg'});
-                x.wrap();
-            }).should.throw('xsql.wrap: Missing parameter');
-        });
         it('single quote by default', function () {
             var x = new xsql({dialect:'pg'});
             x.wrap('str').should.equal("'str'");
@@ -50,12 +38,6 @@ describe('quotes', function () {
     });
 
     describe('escape', function () {
-        it('throw error on missing parameter', function () {
-            (function () {
-                var x = new xsql({dialect:'pg'});
-                x.escape();
-            }).should.throw('xsql.escape: Missing parameter');
-        });
         it('escape single quotes', function () {
             var x = new xsql({dialect:'pg'});
             x.escape("that's true").should.equal("that\\'s true");
@@ -67,12 +49,6 @@ describe('quotes', function () {
     });
 
     describe('string', function () {
-        it('throw error on missing parameter', function () {
-            (function () {
-                var x = new xsql({dialect:'pg'});
-                x.string();
-            }).should.throw('xsql.string: Missing parameter');
-        });
         it('escape single quotes', function () {
             var x = new xsql({dialect:'pg'});
             x.string("that's true").should.equal("'that\\'s true'");
