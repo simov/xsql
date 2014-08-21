@@ -1,0 +1,26 @@
+{
+    "name": "xsql",
+    "version": "1.0.0",
+    "description": "SQL Query Builder",
+    "keywords": [
+        "sql", "query", "builder", "mysql", "mariadb", "sqlite", "postgresql", "pg"
+    ],
+    "license"   : "MIT",
+    "homepage"  : "https://github.com/simov/xsql",
+    "author": {
+        "name"  : "simo",
+        "email" : "simeonvelichkov@gmail.com"
+    },
+    "repository": {
+        "type"  : "git",
+        "url"   : "git://github.com/simov/xsql.git"
+    },
+    "devDependencies": {
+        "mocha" : "*",
+        "should": "*"
+    },
+    "main": "./lib/instance",
+    "scripts": {
+        "test": "node_modules/mocha/bin/mocha"
+    }
+}
