@@ -294,4 +294,63 @@ describe('primitive', function () {
             }).should.throw('xsql.eq: Both arguments should be strings');
         });
     });
+
+    describe('groupby', function () {
+        it('throw error on missing first argument', function () {
+            (function () {
+                x.groupby();
+            }).should.throw('xsql.groupby: First argument is required');
+        });
+        it('throw error on non string or array first argument', function () {
+            (function () {
+                x.groupby({});
+            }).should.throw('xsql.groupby: First argument should be string or array');
+        });
+        it('throw error on empty first argument', function () {
+            (function () {
+                x.groupby([]);
+            }).should.throw('xsql.groupby: First argument is empty');
+        });
+    });
+
+    describe('orderby', function () {
+        it('throw error on missing first argument', function () {
+            (function () {
+                x.orderby();
+            }).should.throw('xsql.orderby: First argument is required');
+        });
+        it('throw error on non string, array or object first argument', function () {
+            (function () {
+                x.orderby(2);
+            }).should
+            .throw('xsql.orderby: First argument should be string, array or object');
+        });
+        it('throw error on empty first argument', function () {
+            (function () {
+                x.orderby([]);
+            }).should.throw('xsql.orderby: First argument is empty');
+        });
+    });
+
+    describe('limit', function () {
+        it('throw error on missing arguments', function () {
+            (function () {
+                x.limit();
+            }).should.throw('xsql.limit: Both arguments are required');
+        });
+        it('throw error on non number arguments', function () {
+            (function () {
+                x.limit(1,'2');
+            }).should
+            .throw('xsql.limit: Both arguments should be numbers');
+        });
+    });
+
+    describe('in', function () {
+        it('throw error on missing first argument', function () {
+            (function () {
+                x.in();
+            }).should.throw('xsql.in: First argument is required');
+        });
+    });
 });
