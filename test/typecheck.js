@@ -201,4 +201,27 @@ describe('primitive', function () {
             }).should.throw('xsql.join: Third argument should be string');
         });
     });
+
+    describe('eq', function () {
+        it('throw error on missing arguments', function () {
+            (function () {
+                x.eq();
+            }).should.throw('xsql.eq: Both arguments are required');
+        });
+        it('throw error on missing second argument', function () {
+            (function () {
+                x.eq('a');
+            }).should.throw('xsql.eq: Both arguments are required');
+        });
+        it('throw error on non string first argument', function () {
+            (function () {
+                x.eq([],'b');
+            }).should.throw('xsql.eq: Both arguments should be strings');
+        });
+        it('throw error on non string second argument', function () {
+            (function () {
+                x.eq('a',{});
+            }).should.throw('xsql.eq: Both arguments should be strings');
+        });
+    });
 });
