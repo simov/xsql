@@ -50,14 +50,14 @@ describe('instance', function () {
         x.schema.should.equal('schema');
     });
     it('enable typecheck by default', function () {
+        var x = new xsql({dialect:'pg'});
         (function () {
-            var x = new xsql({dialect:'pg'});
             x.join();
-        }).should.throw('xsql.join: First argument is required');
+        }).should.throw('xsql.join: First argument should be String');
     });
     it('disable typecheck', function () {
+        var x = new xsql({dialect:'pg', typecheck:false});
         (function () {
-            var x = new xsql({dialect:'pg', typecheck:false});
             x.join();
         }).should.throw("Cannot call method 'join' of undefined");
     });

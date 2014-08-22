@@ -15,6 +15,9 @@
         "type"  : "git",
         "url"   : "git://github.com/simov/xsql.git"
     },
+    "dependencies": {
+        "type-check": "0.3.1"
+    },
     "devDependencies": {
         "mocha" : "*",
         "should": "*"

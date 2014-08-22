@@ -155,11 +155,14 @@ describe('primitive', function () {
 
     describe('in', function () {
         var x; before(function () {x = new xsql({dialect:'pg'})});
-        it('string argument', function () {
+        it('number argument', function () {
             x.in(1).should.equal('in(1)');
         });
+        it('string argument', function () {
+            x.in('a').should.equal("in('a')");
+        });
         it('array argument', function () {
-            x.in([1,'x']).should.equal("in(1,'x')");
+            x.in([1,'a']).should.equal("in(1,'a')");
         });
     });
 });
