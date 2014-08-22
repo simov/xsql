@@ -55,7 +55,7 @@ describe('primitive', function () {
     describe('alias', function () {
         var x; before(function () {x = new xsql({dialect:'pg'})});
         it('table name', function () {
-            x.alias('table', 'name').should.equal('table "name"');
+            x.alias('table', 'name').should.equal('table name');
         });
     });
 
