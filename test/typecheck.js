@@ -47,7 +47,7 @@ describe('typecheck', function () {
             ].join(' ');
 
             it(message, function () {
-                console.log(func, pass);
+                // console.log(func, pass);
                 (function () {
                     x[func].apply(null, pass);
                 }).should.throw(message);
