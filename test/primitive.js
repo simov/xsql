@@ -15,7 +15,7 @@ describe('primitive', function () {
         });
         it('table.column pg', function () {
             var x = new xsql({dialect:'pg'});
-            x.name('column','table').should.equal('"public"."table"."column"');
+            x.name('column','table').should.equal('"table"."column"');
         });
         it('schema.table.column', function () {
             var x = new xsql({dialect:'pg'});
@@ -36,7 +36,7 @@ describe('primitive', function () {
         it('table.colums pg', function () {
             var x = new xsql({dialect:'pg'});
             x.names(['col1','col2'],'tbl')
-                .should.equal('"public"."tbl"."col1","public"."tbl"."col2"');
+                .should.equal('"tbl"."col1","tbl"."col2"');
         });
         it('schema.table.colums', function () {
             var x = new xsql({dialect:'pg'});

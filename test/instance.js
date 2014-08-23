@@ -85,7 +85,7 @@ describe('instance', function () {
             pg.quotes('column').should.equal('"column"');
             // primitive
             mysql.name('column','table').should.equal('`table`.`column`');
-            pg.name('column','table').should.equal('"public"."table"."column"');
+            pg.name('column','table').should.equal('"table"."column"');
         });
     });
 });
