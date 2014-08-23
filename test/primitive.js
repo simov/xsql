@@ -13,10 +13,6 @@ describe('primitive', function () {
             var x = new xsql({dialect:'sqlite'});
             x.name('column','table').should.equal('"table"."column"');
         });
-        it('table.column pg', function () {
-            var x = new xsql({dialect:'pg'});
-            x.name('column','table').should.equal('"table"."column"');
-        });
         it('schema.table.column', function () {
             var x = new xsql({dialect:'pg'});
             x.name('column','table','schema').should.equal('"schema"."table"."column"');
@@ -32,11 +28,6 @@ describe('primitive', function () {
             var x = new xsql({dialect:'mysql'});
             x.names(['col1','col2'],'tbl')
                 .should.equal('`tbl`.`col1`,`tbl`.`col2`');
-        });
-        it('table.colums pg', function () {
-            var x = new xsql({dialect:'pg'});
-            x.names(['col1','col2'],'tbl')
-                .should.equal('"tbl"."col1","tbl"."col2"');
         });
         it('schema.table.colums', function () {
             var x = new xsql({dialect:'pg'});
@@ -163,6 +154,50 @@ describe('primitive', function () {
         });
         it('array argument', function () {
             x.in([1,'a']).should.equal("in(1,'a')");
+        });
+    });
+
+    describe('and', function () {
+        var x; before(function () {x = new xsql({dialect:'pg'})});
+        it('string', function () {
+            x.and('expr').should.equal('and expr');
+        });
+    });
+
+    describe('or', function () {
+        var x; before(function () {x = new xsql({dialect:'pg'})});
+        it('string', function () {
+            x.or('expr').should.equal('or expr');
+        });
+    });
+
+    describe('between', function () {
+        var x; before(function () {x = new xsql({dialect:'pg'})});
+        it('string and number', function () {
+            x.between('a',1).should.equal('between a and 1');
+        });
+        it('number and string', function () {
+            x.between(1,'a').should.equal('between 1 and a');
+        });
+    });
+
+    describe('like', function () {
+        var x; before(function () {x = new xsql({dialect:'pg'})});
+        it('string', function () {
+            x.like('a').should.equal('like a');
+        });
+    });
+
+    describe('where', function () {
+        var x; before(function () {x = new xsql({dialect:'pg'})});
+        it('string', function () {
+            x.where('a=b').should.equal('where a=b');
+        });
+        it('array', function () {
+            x.where(['a=b','c=d']).should.equal('where a=b and c=d');
+        });
+        it('array and logical operator', function () {
+            x.where(['a=b','c=d'],'or').should.equal('where a=b or c=d');
         });
     });
 });
