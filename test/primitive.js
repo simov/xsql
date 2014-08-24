@@ -200,4 +200,42 @@ describe('primitive', function () {
             x.where(['a=b','c=d'],'or').should.equal('where a=b or c=d');
         });
     });
+
+    describe('insert', function () {
+        var x; before(function () {x = new xsql({dialect:'pg'})});
+        it('string', function () {
+            x.insert('tbl', 'col', 'val')
+                .should.equal("insert into tbl (col) values ('val')");
+        });
+        it('array', function () {
+            x.insert('tbl', ['col1','col2'], [1,'str'])
+                .should.equal("insert into tbl (col1,col2) values (1,'str')");
+        });
+        it('escape string values', function () {
+            x.insert('tbl', ['col1','col2'], [1,'s\'tr"2"'])
+                .should.equal("insert into tbl (col1,col2) values (1,'s\\'tr\\\"2\\\"')");
+        });
+    });
+
+    describe('update', function () {
+        var x; before(function () {x = new xsql({dialect:'pg'})});
+        it('string', function () {
+            x.update('tbl','col','str').should.equal("update tbl set col='str'");
+        });
+        it('array', function () {
+            x.update('tbl',['col1','col2'],[1,'str'])
+                .should.equal("update tbl set col1=1,col2='str'");
+        });
+        it('escape string values', function () {
+            x.update('tbl',['col1','col2'],[1,'s\'tr"2"'])
+                .should.equal("update tbl set col1=1,col2='s\\'tr\\\"2\\\"'");
+        });
+    });
+
+    describe('delete', function () {
+        var x; before(function () {x = new xsql({dialect:'pg'})});
+        it('string', function () {
+            x.delete('tbl').should.equal('delete from tbl');
+        });
+    });
 });
