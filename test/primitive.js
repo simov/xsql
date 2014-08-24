@@ -219,6 +219,10 @@ describe('primitive', function () {
             x.insert('tbl', ['col1','col2'], [[1,2],['a','b']])
                 .should.equal("insert into tbl (col1,col2) values (1,2),('a','b')");
         });
+        it('string columns and array values', function () {
+            x.insert('tbl', 'col1,col2', [[1,2],['a','b']])
+                .should.equal("insert into tbl (col1,col2) values (1,2),('a','b')");
+        });
     });
 
     describe('update', function () {
