@@ -162,12 +162,18 @@ describe('primitive', function () {
         it('string', function () {
             x.and('expr').should.equal('and expr');
         });
+        it('array', function () {
+            x.and(['expr1','expr2']).should.equal('expr1 and expr2');
+        });
     });
 
     describe('or', function () {
         var x; before(function () {x = new xsql({dialect:'pg'})});
         it('string', function () {
             x.or('expr').should.equal('or expr');
+        });
+        it('array', function () {
+            x.or(['expr1','expr2']).should.equal('expr1 or expr2');
         });
     });
 
