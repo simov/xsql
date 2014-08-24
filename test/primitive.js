@@ -138,9 +138,13 @@ describe('primitive', function () {
     });
 
     describe('limit', function () {
-        var x; before(function () {x = new xsql({dialect:'pg'})});
         it('limit', function () {
+            var x = new xsql({dialect:'mysql'});
             x.limit(1,2).should.equal('limit 1,2')
+        });
+        it('limit pg', function () {
+            var x = new xsql({dialect:'pg'});
+            x.limit(1,2).should.equal('limit 1 offset 2')
         });
     });
 
