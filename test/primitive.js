@@ -93,6 +93,13 @@ describe('primitive', function () {
         });
     });
 
+    describe('eq', function () {
+        var x; before(function () {x = new xsql({dialect:'pg'})});
+        it('eq', function () {
+            x.eq('a','b').should.equal('a = b');
+        });
+    });
+
     describe('groupby', function () {
         var x; before(function () {x = new xsql({dialect:'pg'})});
         it('group by string', function () {
