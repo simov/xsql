@@ -266,6 +266,10 @@ describe('primitive', function () {
             x.insert('tbl', 'col1,col2', [1,null])
                 .should.equal("insert into tbl (col1,col2) values (1,null)");
         });
+        it('do not escape binary strings', function () {
+            x.insert('tbl', ['col1','col2'], ["X\'blob\'","\'\\xblob\'"])
+                .should.equal("insert into tbl (col1,col2) values (X\'blob\',\'\\xblob\')");
+        });
     });
 
     describe('update', function () {
@@ -280,6 +284,10 @@ describe('primitive', function () {
         it('escape string values', function () {
             x.update('tbl',['col1','col2'],[1,'s\'tr"2"'])
                 .should.equal("update tbl set col1=1,col2='s\\'tr\\\"2\\\"'");
+        });
+        it('do not escape binary strings', function () {
+            x.update('tbl', ['col1','col2'], ["X\'blob\'","\'\\xblob\'"])
+                .should.equal("update tbl set col1=X\'blob\',col2=\'\\xblob\'");
         });
     });
 
