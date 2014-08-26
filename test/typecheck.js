@@ -10,7 +10,9 @@ describe('typecheck', function () {
         types: {
             'String': 'a',
             'Number': 1,
-            'Array': [],
+            'Boolean': true,
+            'Null': null,
+            'Array': [[]],
             'Object': {}
         },
         miss: function (types) {

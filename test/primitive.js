@@ -96,7 +96,29 @@ describe('primitive', function () {
     describe('eq', function () {
         var x; before(function () {x = new xsql({dialect:'pg'})});
         it('eq', function () {
-            x.eq('a','b').should.equal('a = b');
+            x.eq('a','b').should.equal('a=b');
+        });
+    });
+
+    describe('eqv', function () {
+        var x; before(function () {x = new xsql({dialect:'mysql'})});
+        it('undefined', function () {
+            x.eqv('col',undefined).should.equal('col=null');
+        });
+        it('null', function () {
+            x.eqv('col',null).should.equal('col=null');
+        });
+        it('string', function () {
+            x.eqv('col','v\'a"l"').should.equal("col='v\\\'a\\\"l\\\"'");
+        });
+        it('boolean', function () {
+            x.eqv('col',false).should.equal('col=0');
+            x.eqv('col',true).should.equal('col=1');
+        });
+        it('boolean pg', function () {
+            x = new xsql({dialect:'pg'});
+            x.eqv('col',false).should.equal("col='f'");
+            x.eqv('col',true).should.equal("col='t'");
         });
     });
 
