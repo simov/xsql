@@ -50,11 +50,11 @@ describe('instance', function () {
     describe('pg', function () {
         it('use public schema by default', function () {
             var x = new xsql({dialect:'pg'});
-            x.schema.should.equal('public');
+            x._schema.should.equal('public');
         });
         it('set schema name', function () {
-            var x = new xsql({dialect:'pg',schema:'schema'});
-            x.schema.should.equal('schema');
+            var x = new xsql({dialect:'pg', schema:'schema'});
+            x._schema.should.equal('schema');
         });
     });
 

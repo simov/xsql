@@ -1,4 +1,5 @@
 
+var should = require('should');
 var xsql = require('../lib/instance');
 
 
@@ -33,6 +34,26 @@ describe('primitive', function () {
             var x = new xsql({dialect:'pg'});
             x.names(['col1','col2'],'tbl','schema')
                 .should.equal('"schema"."tbl"."col1","schema"."tbl"."col2"');
+        });
+    });
+
+    describe('schema', function () {
+        it('undefined on non pg dialect', function () {
+            var x = new xsql({dialect:'mysql'});
+            should.equal(x.schema(), undefined);
+            should.equal(x.schema('x'), undefined);
+        });
+        it('public schema by default', function () {
+            var x = new xsql({dialect:'pg'});
+            x.schema().should.equal('public');
+        });
+        it('globally defined schema', function () {
+            var x = new xsql({dialect:'pg', schema:'x'});
+            x.schema().should.equal('x');
+        });
+        it('specify schema', function () {
+            var x = new xsql({dialect:'pg', schema:'x'});
+            x.schema('y').should.equal('y');
         });
     });
 
