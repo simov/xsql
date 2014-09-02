@@ -10,7 +10,8 @@ var x = new Xsql({dialect:'mysql'});
 var query = [
   x.select(x.names(['col1','col2'],'tbl')),
   x.from(x.name('tbl')),
-  x.where(x.eq(x.name('id','tbl'),2)), ';'
+  x.where(x.eq(x.name('id','tbl'),2)),
+  ';'
 ].join(' ');
 ```
 
