@@ -1,6 +1,6 @@
 {
     "name": "xsql",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "SQL Query Builder",
     "keywords": [
         "sql", "query", "builder", "mysql", "mariadb", "sqlite", "postgresql", "pg"
