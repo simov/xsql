@@ -40,22 +40,14 @@ describe('escape', function () {
     describe('escape', function () {
         it('escape single quotes', function () {
             var x = new xsql({dialect:'pg'});
-            x.escape("that's true").should.equal("that\\'s true");
-        });
-        it('escape double quotes', function () {
-            var x = new xsql({dialect:'pg'});
-            x.escape('my "name" quoted').should.equal('my \\"name\\" quoted');
+            x.escape("that's true").should.equal("that''s true");
         });
     });
 
     describe('string', function () {
         it('escape single quotes', function () {
             var x = new xsql({dialect:'pg'});
-            x.string("that's true").should.equal("'that\\'s true'");
-        });
-        it('escape double quotes', function () {
-            var x = new xsql({dialect:'pg'});
-            x.string('my "name" quoted').should.equal('\'my \\"name\\" quoted\'');
+            x.string("that's true").should.equal("'that''s true'");
         });
     });
 });

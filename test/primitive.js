@@ -130,7 +130,7 @@ describe('primitive', function () {
             x.eqv('col',null).should.equal('col=null');
         });
         it('string', function () {
-            x.eqv('col','v\'a"l"').should.equal("col='v\\\'a\\\"l\\\"'");
+            x.eqv('col','v\'a"l"').should.equal("col='v''a\"l\"'");
         });
         it('boolean', function () {
             x.eqv('col',false).should.equal('col=0');
@@ -273,7 +273,7 @@ describe('primitive', function () {
         });
         it('escape string values', function () {
             x.insert('tbl', ['col1','col2'], [1,'s\'tr"2"'])
-                .should.equal("insert into tbl (col1,col2) values (1,'s\\'tr\\\"2\\\"')");
+                .should.equal("insert into tbl (col1,col2) values (1,'s''tr\"2\"')");
         });
         it('multiple records', function () {
             x.insert('tbl', ['col1','col2'], [[1,2],['a','b']])
@@ -304,7 +304,7 @@ describe('primitive', function () {
         });
         it('escape string values', function () {
             x.update('tbl',['col1','col2'],[1,'s\'tr"2"'])
-                .should.equal("update tbl set col1=1,col2='s\\'tr\\\"2\\\"'");
+                .should.equal("update tbl set col1=1,col2='s''tr\"2\"'");
         });
         it('do not escape binary strings', function () {
             x.update('tbl', ['col1','col2'], ["X\'blob\'","\'\\xblob\'"])
