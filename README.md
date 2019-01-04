@@ -50,6 +50,7 @@ select `tbl`.`col1`,`tbl`.`col2` from `tbl` where `tbl`.`id`=2 ;
 - **`or`**         : [`String|Array`]
 - **`between`**    : [`String|Number`, `String|Number`]
 - **`like`**       : [`String`]
+- ** `ilike`**     : [`String`]
 - **`where`**      : [`String|Array`, `Undefined|String`]
 - **`insert`**     : [`String`, `String|Array`, `String|Array`]
 - **`update`**     : [`String`, `String|Array`, `String|Array`]

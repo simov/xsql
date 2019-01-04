@@ -248,6 +248,13 @@ describe('primitive', function () {
         });
     });
 
+    describe('ilike', function () {
+        var x; before(function () {x = new xsql({dialect:'pg'})});
+        it('string', function () {
+            x.ilike('a').should.equal('ilike a');
+        });
+    })
+
     describe('where', function () {
         var x; before(function () {x = new xsql({dialect:'pg'})});
         it('string', function () {
